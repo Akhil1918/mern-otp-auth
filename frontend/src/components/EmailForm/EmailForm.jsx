@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import './EmailForm.css'
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const EmailForm = () => {
   const [email, setEmail] = useState('')
   const navigate = useNavigate()
@@ -10,7 +12,7 @@ const EmailForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      await axios.post('http://localhost:5000/api/send-otp', { email })
+      await axios.post(`${API_URL}/api/send-otp`, { email })
       localStorage.setItem('otpEmail', email)
       navigate('/verify-otp')
     } catch (error) {

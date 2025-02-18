@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import './OTPForm.css'
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const OTPForm = () => {
   const [otp, setOtp] = useState('')
   const navigate = useNavigate()
@@ -10,7 +12,7 @@ const OTPForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const response = await axios.post('http://localhost:5000/api/verify-otp', { 
+      const response = await axios.post(`${API_URL}/api/verify-otp`, { 
         email: localStorage.getItem('otpEmail'),
         otp 
       })
