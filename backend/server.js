@@ -9,7 +9,7 @@ const app = express()
 
 // Middleware
 app.use(cors({
-  origin: ['https://your-frontend-domain.com'],
+  origin: ['https://frontend-77dhob3qw-akhil-vinod-ns-projects.vercel.app'],
   methods: ['POST']
 }))
 app.use(express.json())
