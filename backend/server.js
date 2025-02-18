@@ -9,9 +9,12 @@ const app = express()
 
 // Middleware
 app.use(cors({
-  origin: ['https://frontend-77dhob3qw-akhil-vinod-ns-projects.vercel.app'],
-  methods: ['POST']
+  origin: ['https://frontend-qh2u8njca-akhil-vinod-ns-projects.vercel.app'],
+  methods: ['POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type'],
+  credentials: true
 }))
+app.options('*', cors())
 app.use(express.json())
 
 // Database connection
@@ -23,7 +26,8 @@ mongoose.connect(process.env.MONGO_URI)
 app.use('/api', authRoutes)
 app.use('/api/send-otp', rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 5 // limit each IP to 5 requests per windowMs
+  max: 5,
+  skip: (req) => req.method === 'OPTIONS' // Skip OPTIONS requests
 }))
 
 const PORT = process.env.PORT || 5000
